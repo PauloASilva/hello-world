@@ -3,6 +3,7 @@ package web
 import (
 	"fmt"
 	"github.com/PauloASilva/hello-world/config"
+	"github.com/PauloASilva/hello-world/controllers"
 	"net/http"
 )
 
@@ -12,9 +13,10 @@ func NewServer(conf *config.Config) {
 	var listenAddress string
 
 	router = http.NewServeMux()
-	router.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-		fmt.Fprintf(w, "Welcome home!")
-	})
+
+	// Register application controllers
+	controllers.HomeRegister(router)
+	controllers.AboutRegister(router)
 
 	// start server
 	listenAddress = fmt.Sprintf(":%d", conf.Port)
