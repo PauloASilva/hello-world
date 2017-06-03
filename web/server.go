@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/PauloASilva/hello-world/config"
 	"github.com/PauloASilva/hello-world/controllers"
+	"github.com/PauloASilva/m1"
 	"net/http"
 )
 
@@ -17,6 +18,9 @@ func NewServer(conf *config.Config) {
 	// Register application controllers
 	controllers.HomeRegister(router)
 	controllers.AboutRegister(router)
+
+	// Load modules
+	m1.Register(router)
 
 	// start server
 	listenAddress = fmt.Sprintf(":%d", conf.Port)
